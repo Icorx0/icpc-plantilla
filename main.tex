@@ -1,0 +1,172 @@
+% main.tex - ICPC template with embedded algorithm listings
+\documentclass{article}
+
+% Encoding and language
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel} % To use english text
+\usepackage{geometry}       % Adjust margings
+\geometry{a4paper, margin=1in} % Reasonable page margins
+
+% Graphics and floats
+\usepackage{graphicx}       % Insert images
+\usepackage{caption}        % Personalize captions
+\usepackage{float}          % Adjust images
+\usepackage{url}            % For \url command
+
+% Code listings
+\usepackage{listings}       % Put code
+\usepackage{xcolor}         % Color code
+
+% Math
+\usepackage{amsmath}        % Math package
+
+% Listings: C++ style
+\lstdefinestyle{c++}{
+    language=C++,
+    backgroundcolor=\color{white},
+    commentstyle=\color{green!40!black},
+    keywordstyle=\color{blue}\bfseries,
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{purple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    frame=single,
+    rulecolor=\color{black}
+}
+\lstset{style=c++}
+
+\title{Tit For Tat}
+\author{icorx0, nhrot, vinnie26}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Base} % --------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Template}
+\lstinputlisting[language=C++, caption={template.cpp}]{base/template.cpp}
+
+\subsection{Tester}
+\lstinputlisting[language=Bash, caption={tester.sh}]{base/tester.sh}
+
+
+\section{Data Structures} % --------------------------------------------------------------------------------------------------------------------------------------
+\subsection{DSU}
+\lstinputlisting[language=C++, caption={DSU.cpp}]{algorithms/DSU.cpp}
+
+
+\subsection{MergeSortTree}
+\lstinputlisting[language=C++, caption={MergeSortTree.cpp}]{algorithms/MergeSortTree.cpp}
+
+
+\subsection{SegmentTree}
+\lstinputlisting[language=C++, caption={SegmentTree.cpp}]{algorithms/SegmentTree.cpp}
+
+
+\subsection{SparseTable}
+\lstinputlisting[language=C++, caption={SparseTable.cpp}]{algorithms/SparseTable.cpp}
+
+
+\subsection{Fenwick (BIT)}
+\lstinputlisting[language=C++, caption={Fenwick.cpp}]{algorithms/Fenwick.cpp}
+
+
+\section{Trees} % --------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Heavy-Light Decomposition (HLD)}
+\lstinputlisting[language=C++, caption={HLD.cpp}]{algorithms/HLD.cpp}
+
+
+\subsection{Centroid Decomposition}
+\lstinputlisting[language=C++, caption={CentroidDecomposition.cpp}]{algorithms/CentroidDecomposition.cpp}
+
+
+\subsection{Lowest Common Ancestor (LCA) - Binary Lifting}
+\lstinputlisting[language=C++, caption={LCA.cpp}]{algorithms/LCA.cpp}
+
+
+\section{Graphs} % --------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Dijkstra}
+\lstinputlisting[language=C++, caption={Dijkstra.cpp}]{algorithms/Dijkstra.cpp}
+
+
+\subsection{Floyd-Warshall}
+\lstinputlisting[language=C++, caption={FloydWarshall.cpp}]{algorithms/FloydWarshall.cpp}
+
+
+\subsection{Kruskal}
+\lstinputlisting[language=C++, caption={Kruskal.cpp}]{algorithms/Kruskal.cpp}
+
+
+\subsection{Max Flow (Dinic)}
+\lstinputlisting[language=C++, caption={Dinic.cpp}]{algorithms/Dinic.cpp}
+
+
+\subsection{Topological Sort (Kahn's Algorithm)}
+\lstinputlisting[language=C++, caption={TopoSort.cpp}]{algorithms/TopoSort.cpp}
+
+
+\section{Mathematics and Number Theory} % --------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Sieve}
+\lstinputlisting[language=C++, caption={Sieve.cpp}]{algorithms/Sieve.cpp}
+
+
+\subsection{Extended Euclidean Algorithm}
+\lstinputlisting[language=C++, caption={ExtendedEuclid.cpp}]{algorithms/ExtendedEuclid.cpp}
+
+
+\subsection{Binomial Coefficients (nCr) and Modular Arithmetic}
+\lstinputlisting[language=C++, caption={BinomialCoefficients.cpp}]{algorithms/BinomialCoefficients.cpp}
+
+
+\section{Strings} % --------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Hashing}
+\lstinputlisting[language=C++, caption={Hashing.cpp}]{algorithms/Hashing.cpp}
+
+
+\subsection{KMP}
+\lstinputlisting[language=C++, caption={KMP.cpp}]{algorithms/KMP.cpp}
+
+
+\subsection{Manacher}
+\lstinputlisting[language=C++, caption={Manacher.cpp}]{algorithms/Manacher.cpp}
+
+
+\subsection{Aho-Corasick - Trie}
+\lstinputlisting[language=C++, caption={AhoCorasick.cpp}]{algorithms/AhoCorasick.cpp}
+
+
+\subsection{Suffix Array + LCP Array}
+\lstinputlisting[language=C++, caption={SuffixArray.cpp}]{algorithms/SuffixArray.cpp}
+
+
+\section{Geometry}  % --------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Convex Hull}
+\lstinputlisting[language=C++, caption={ConvexHull.cpp}]{algorithms/ConvexHull.cpp}
+
+
+\subsection{Closest Pair}
+\lstinputlisting[language=C++, caption={ClosestPair.cpp}]{algorithms/ClosestPair.cpp}
+
+
+\section{DP} % --------------------------------------------------------------------------------------------------------------------------------------
+\subsection{LIS - Longest Increasing Subsequence}
+\lstinputlisting[language=C++, caption={LIS.cpp}]{algorithms/LIS.cpp}
+
+
+\subsection{DP Divide and Conquer}
+\lstinputlisting[language=C++, caption={DPDivideAndConquer.cpp}]{algorithms/DPDivideAndConquer.cpp}
+
+\section{Bitmasking} % --------------------------------------------------------------------------------------------------------------------------------------
+\lstinputlisting[language=C++, caption={Bitwise.cpp}]{algorithms/Bitwise.cpp}
+\end{document}

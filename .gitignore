@@ -1,0 +1,10 @@
+# LaTeX intermediate files
+*.aux
+*.log
+*.out
+*.toc
+*.nav
+*.snm
+*.fls
+*.synctex.gz
+*.tex.swp
