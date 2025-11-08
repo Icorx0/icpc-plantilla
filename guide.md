@@ -45,7 +45,7 @@ int main() {
 }
 ```
 
-\newpage
+
 
 # TESTER SHELL SCRIPT
 
@@ -75,7 +75,7 @@ for IN in in/"${BASENAME}"*.in; do
 done
 ```
 
-\newpage
+
 # STRINGS
 
 ## 1\. Hashing de Cadenas (Rolling Hash)
@@ -105,18 +105,7 @@ done
     Calcula un arreglo $\pi$ donde $\pi[i]$ es la longitud del prefijo propio más largo de la subcadena $s[0 \dots i]$ que también es sufijo de esta subcadena.
     Si buscamos $P$ en $T$, computamos $\pi$ para la cadena $P + \# + T$ (\# es un separador que no está en $P$ ni $T$). Las posiciones donde $\pi[i] == |P|$ indican una ocurrencia.
 
-## 3\. Z-Function
-
-  * **Complejidad:** $O(N)$ tiempo, $O(N)$ espacio.
-  * **Subproblemas:**
-      * Búsqueda de patrones (similar a KMP con $P + \# + T$).
-      * Encontrar el prefijo común más largo de todos los sufijos con la cadena original.
-      * Compresión de cadenas.
-  * **Funcionamiento:**
-    Calcula un arreglo $Z$ donde $Z[i]$ es la longitud del prefijo común más largo entre la cadena $s$ y el sufijo que comienza en $s[i]$.
-    Mantiene un intervalo $[L, R]$ que es el segmento más a la derecha que coincide con un prefijo de $s$. Usa valores previos de $Z$ para inicializar nuevos valores y evitar comparaciones redundantes.
-
-## 4\. Manacher (Palíndromos)
+## 3\. Manacher (Palíndromos)
 
   * **Complejidad:** $O(N)$ tiempo, $O(N)$ espacio.
   * **Subproblemas:**
@@ -127,17 +116,7 @@ done
     Maneja palíndromos de longitud impar y par por separado (o transforma la cadena insertando caracteres dummy `#` entre cada letra: `aba` -\> `#a#b#a#`).
     Usa un intervalo $[L, R]$ del palíndromo encontrado más a la derecha para aprovechar simetrías y saltar cálculos.
 
-## 5\. Trie (Prefix Tree)
-
-  * **Complejidad:** Inserción/Búsqueda $O(|S| \cdot \Sigma)$, donde $|S|$ es longitud de cadena y $\Sigma$ tamaño del alfabeto.
-  * **Subproblemas:**
-      * Autocompletado / Búsqueda de prefijos.
-      * Almacenar diccionario de palabras.
-      * Maximum XOR de dos números en un arreglo (usando Binary Trie).
-  * **Funcionamiento:**
-    Árbol donde cada arista representa un carácter. El camino desde la raíz a un nodo representa un prefijo. Nodos específicos se marcan como "fin de palabra".
-
-## 6\. Aho-Corasick
+## 4\. Aho-Corasick
 
   * **Complejidad:** $O(N + \sum |P_i| + \text{ocu})$ tiempo.
   * **Subproblemas:**
@@ -148,7 +127,7 @@ done
     2.  Calcula "failure links" (enlaces de sufijo) usando BFS. Un enlace de sufijo desde un nodo $u$ apunta al nodo que representa el sufijo propio más largo de la cadena correspondiente a $u$ que también existe en el Trie.
     3.  Para buscar, se transita por el autómata; si no hay transición, se sigue el failure link.
 
-## 7\. Suffix Array + LCP Array
+## 5\. Suffix Array + LCP Array
 
   * **Complejidad:** $O(N \log N)$ construcción, $O(N)$ para LCP.
   * **Subproblemas:**
@@ -163,19 +142,7 @@ done
 
 # ÁRBOLES
 
-## 1\. Recorridos Básicos (DFS / BFS)
-
-  * **Complejidad:** $O(N)$ (ya que $M = N-1$ en árboles).
-  * **Subproblemas:**
-      * Cálculo de profundidad (`depth`) y tamaño de subárboles (`subtree_size`).
-      * Detección de componentes conexas (en bosques).
-      * Bipartición de grafos (verificación de 2-coloreable).
-      * Ordenamiento topológico (en DAGs, concepto similar).
-  * **Funcionamiento:**
-      * **DFS (Depth-First Search):** Explora tan profundo como sea posible antes de retroceder. Usa recursión o pila. Vital para precomputo de ancestros, tiempos de entrada/salida.
-      * **BFS (Breadth-First Search):** Explora por niveles. Usa cola. Vital para caminos más cortos en grafos sin peso.
-
-## 2\. Lowest Common Ancestor (LCA) - Binary Lifting
+## 1\. Lowest Common Ancestor (LCA) - Binary Lifting
 
   * **Complejidad:** $O(N \log N)$ precomputo, $O(\log N)$ por consulta.
   * **Subproblemas:**
@@ -191,17 +158,7 @@ done
     4.  Si no, subir ambos simultáneamente con saltos de potencia de 2 decrecientes mientras `up[u][i] != up[v][i]`.
     5.  El LCA será `up[u][0]` al finalizar.
 
-## 3\. Tree Flattening (Euler Tour Technique)
-
-  * **Complejidad:** $O(N)$ precomputo.
-  * **Subproblemas:**
-      * Consultas de subárboles (suma, mínimo, máximo).
-      * Actualización de valores en nodos individuales y consultas de subárbol.
-  * **Funcionamiento:**
-    Registra el tiempo de entrada (`tin`) y salida (`tout`) de cada nodo durante un DFS.
-    El subárbol de $u$ corresponde al rango contiguo $[tin[u], tout[u]]$ en el arreglo linealizado. Se puede usar un Segment Tree o Fenwick Tree sobre este arreglo.
-
-## 4\. Heavy-Light Decomposition (HLD)
+## 2\. Heavy-Light Decomposition (HLD)
 
   * **Complejidad:** $O(N)$ precomputo, $O(\log^2 N)$ por consulta/actualización.
   * **Subproblemas:**
@@ -212,7 +169,7 @@ done
     Cualquier camino desde la raíz a un nodo cambia de cadena a lo sumo $O(\log N)$ veces.
     Se usa una estructura de datos (usualmente Segment Tree) para mantener los valores sobre estas cadenas linealizadas.
 
-## 5\. Centroid Decomposition
+## 3\. Centroid Decomposition
 
   * **Complejidad:** $O(N \log N)$ total.
   * **Subproblemas:**
@@ -224,44 +181,10 @@ done
     Elimina el centroide y aplica recursivamente en los subárboles restantes.
     Esto forma un "Árbol de Centroides" de altura $O(\log N)$.
 
-## 6\. Diámetro del Árbol
-
-  * **Complejidad:** $O(N)$.
-  * **Subproblemas:**
-      * Encontrar la longitud del camino más largo.
-      * Encontrar los nodos que forman el diámetro.
-  * **Funcionamiento (Método doble BFS/DFS):**
-    1.  Ejecutar BFS/DFS desde un nodo arbitrario $x$ para encontrar el nodo más lejano, digamos $u$.
-    2.  Ejecutar BFS/DFS desde $u$ para encontrar el nodo más lejano, digamos $v$.
-    3.  El camino de $u$ a $v$ es el diámetro.
-
-
-\newpage
-
 # GRAFOS
 
-## 1\. Breadth-First Search (BFS)
 
-  * **Complejidad:** $O(V + E)$.
-  * **Subproblemas:**
-      * Camino más corto en grafos no ponderados.
-      * Encontrar componentes conexas.
-      * Verificar si un grafo es bipartito.
-  * **Funcionamiento:**
-    Explora el grafo por niveles comenzando desde un nodo fuente. Usa una cola para mantener el orden de visita. Garantiza encontrar el camino con menor número de aristas primero.
-
-## 2\. Depth-First Search (DFS)
-
-  * **Complejidad:** $O(V + E)$.
-  * **Subproblemas:**
-      * Detección de ciclos.
-      * Ordenamiento topológico.
-      * Componentes fuertemente conexas (algoritmo de Kosaraju/Tarjan).
-      * Encontrar puentes y puntos de articulación.
-  * **Funcionamiento:**
-    Explora tan profundo como sea posible a lo largo de cada rama antes de retroceder. Se implementa naturalmente con recursión.
-
-## 3\. Dijkstra
+## 1\. Dijkstra
 
   * **Complejidad:** $O(E \log V)$ usando priority\_queue.
   * **Subproblemas:**
@@ -269,7 +192,7 @@ done
   * **Funcionamiento:**
     Mantiene la distancia mínima conocida desde el origen a cada nodo. Usa una cola de prioridad para seleccionar siempre el nodo no visitado con la menor distancia tentativa, relajando sus aristas adyacentes.
 
-## 4\. Bellman-Ford / SPFA
+## 2\. Bellman-Ford / SPFA
 
 Camino más corto con pesos negativos (detecta ciclos negativos).
 
@@ -280,7 +203,7 @@ Camino más corto con pesos negativos (detecta ciclos negativos).
   * **Funcionamiento (Bellman-Ford):**
     Relaja todas las aristas $V-1$ veces. Si en una iteración adicional $V$ alguna distancia se reduce, existe un ciclo negativo alcanzable desde la fuente.
 
-## 5\. Floyd-Warshall
+## 3\. Floyd-Warshall
 
 Todos los pares de caminos más cortos.
 
@@ -291,7 +214,7 @@ Todos los pares de caminos más cortos.
   * **Funcionamiento:**
     Programación dinámica. `d[i][j]` almacena la distancia más corta usando solo nodos intermedios del conjunto $\{0 \dots k\}$. Itera incrementando $k$.
 
-## 6\. Minimum Spanning Tree (Prim / Kruskal)
+## 4\. Minimum Spanning Tree (Prim / Kruskal)
 
 Encontrar un subgrafo que conecte todos los vértices con el peso total mínimo.
 
@@ -302,7 +225,7 @@ Encontrar un subgrafo que conecte todos los vértices con el peso total mínimo.
   * **Funcionamiento (Kruskal):**
     Ordena todas las aristas por peso. Itera y añade la arista si no forma un ciclo (usando Disjoint Set Union - DSU).
 
-## 7\. Topological Sort
+## 5\. Topological Sort
 
 Orden lineal de vértices en un DAG tal que para cada arista $u \to v$, $u$ aparece antes que $v$.
 
@@ -314,7 +237,7 @@ Orden lineal de vértices en un DAG tal que para cada arista $u \to v$, $u$ apar
   * **Funcionamiento (DFS based):**
     Realiza DFS. Cuando un nodo termina de procesarse (post-orden), añádelo al frente de una lista.
 
-## 8\. Puentes y Puntos de Articulación
+## 6\. Puentes y Puntos de Articulación
 
 Encontrar aristas/nodos críticos cuya eliminación desconecta el grafo.
 
@@ -327,20 +250,7 @@ Encontrar aristas/nodos críticos cuya eliminación desconecta el grafo.
       * Puente $(u, v)$: si `low[v] > tin[u]`.
       * Punto de articulación $u$: si `low[v] >= tin[u]` para algún hijo $v$ (caso especial para la raíz).
 
-## 9\. Componentes Fuertemente Conexas (SCC - Kosaraju / Tarjan)
-
-Descomponer un grafo dirigido en componentes donde cada nodo es alcanzable desde cualquier otro en la misma componente.
-
-  * **Complejidad:** $O(V + E)$.
-  * **Subproblemas:**
-      * Condensación de grafos (convertir grafo general en DAG de sus SCCs).
-      * Problemas de 2-SAT.
-  * **Funcionamiento (Algoritmo de Kosaraju):**
-    1.  DFS y guardar nodos en orden de finalización (similar a topo sort).
-    2.  Invertir todas las aristas del grafo ($G^T$).
-    3.  DFS en $G^T$ siguiendo el orden inverso de finalización del paso 1. Cada árbol DFS formado es una SCC.
-
-## 10\. Flujo Máximo (Dinic)
+## 7\. Flujo Máximo (Dinic)
 
 El algoritmo estándar eficiente para problemas de flujo en CP.
 
@@ -352,7 +262,6 @@ El algoritmo estándar eficiente para problemas de flujo en CP.
   * **Funcionamiento:**
     Construye un "Level Graph" usando BFS para encontrar caminos más cortos en el grafo residual. Luego usa DFS múltiples veces para empujar flujo por estos caminos hasta saturarlos (blocking flow). Repite hasta que no se pueda llegar del sumidero al destino en el Level Graph.
 
-\newpage
 
 # PATRONES DE DP
 
@@ -391,8 +300,6 @@ int tsp(int mask, int pos) {
     return memo[mask][pos] = ans;
 }
 ```
-
-
 
 ## 2\. Digit DP (DP sobre Dígitos)
 
@@ -433,8 +340,6 @@ long long dp_digit(int pos, bool tight, bool leading_zeros, int current_sum) {
 }
 ```
 
-
-
 ## 3\. DP en Árboles (Tree DP)
 
 Usar la estructura del árbol para definir subproblemas en subárboles.
@@ -470,8 +375,6 @@ void dfs_tree_dp(int u, int p) {
     }
 }
 ```
-
-
 
 ## 4\. DP en Grids (Tableros 2D)
 
@@ -509,8 +412,6 @@ void solve_grid() {
 }
 ```
 
-
-
 ## 5\. DP de Intervalos (Range DP)
 
 Para problemas donde un rango se puede dividir en dos sub-rangos.
@@ -544,8 +445,6 @@ for (int len = 1; len <= n; len++) {     // Longitud del rango
     }
 }
 ```
-
-\newpage
 
 # ESTRUCTURAS DE DATOS
 
@@ -584,98 +483,6 @@ Estructura versátil para consultas y actualizaciones de rango.
       * Queries complejas (GCD, XOR, etc.).
   * **Funcionamiento:**
     Árbol binario donde cada nodo representa un intervalo. Las hojas son elementos individuales.
-
-### Implementación (Con lazy propagation)
-
-```cpp
-struct Info {
-    i64 sum;
-    Info(i64 val = 0) : sum(val) {}
-};
-
-Info combine(const Info &a, const Info &b) {
-    Info res;
-    res.sum = a.sum + b.sum;
-    return res;
-}
-
-struct Tag {
-    i64 add = 0;
-    bool empty() const { return add == 0; }
-    void merge(const Tag &o) { add += o.add; }
-};
-
-inline void apply_info(Info &x, const Tag &t, int len) {
-    if (t.empty()) return;
-    x.sum += t.add * len;
-}
-
-struct SegTreeLazy {
-    int n;
-    V<Info> st;
-    V<Tag> lz;
-    
-    void init(int n_) {
-        n = 1;
-        while (n < n_) n <<= 1;
-        st.assign(2 * n, Info());
-        lz.assign(2 * n, Tag());
-    }
-    
-    void build(const V<i64> &a) {
-        init(len(a));
-        rep(i, len(a)) st[n + i] = Info(a[i]);
-        for (int i = n - 1; i > 0; --i)
-            st[i] = combine(st[i << 1], st[i << 1 | 1]);
-    }
-    
-    inline void apply(int p, const Tag &t, int len) {
-        apply_info(st[p], t, len);
-        lz[p].merge(t);
-    }
-    
-    inline void push(int p, int l, int r) {
-        if (lz[p].empty() || p >= n) return;
-        int m = (l + r) >> 1;
-        apply(p << 1, lz[p], m - l + 1);
-        apply(p << 1 | 1, lz[p], r - m);
-        lz[p] = Tag();
-    }
-    
-    void range_add(int L, int R, i64 val) {
-        range_add(1, 0, n - 1, L, R, val);
-    }
-    
-    void range_add(int p, int l, int r, int L, int R, i64 val) {
-        if (R < l || r < L) return;
-        if (L <= l && r <= R) {
-            Tag t; t.add = val;
-            apply(p, t, r - l + 1);
-            return;
-        }
-        push(p, l, r);
-        int m = (l + r) >> 1;
-        range_add(p << 1, l, m, L, R, val);
-        range_add(p << 1 | 1, m + 1, r, L, R, val);
-        st[p] = combine(st[p << 1], st[p << 1 | 1]);
-    }
-    
-    Info range_query(int L, int R) {
-        return range_query(1, 0, n - 1, L, R);
-    }
-    
-    Info range_query(int p, int l, int r, int L, int R) {
-        if (R < l || r < L) return Info();
-        if (L <= l && r <= R) return st[p];
-        push(p, l, r);
-        int m = (l + r) >> 1;
-        return combine(range_query(p << 1, l, m, L, R),
-                      range_query(p << 1 | 1, m + 1, r, L, R));
-    }
-};
-```
-
-
 
 ## 4\. Sparse Table
 
@@ -779,7 +586,7 @@ struct BipartiteGraph {
 };
 ```
 
-\newpage
+
 
 # ARITMÉTICA MODULAR Y TEORÍA DE NÚMEROS
 
@@ -796,70 +603,7 @@ i64 string_mod(string big_int, i64 mod = MOD) {
     result = (result * 10 + (c - '0')) % mod;
   }
   return result;
-}
-
-inline i64 addmod(i64 a, i64 b, i64 mod = MOD) {
-    a %= mod; b %= mod;
-    a += b;
-    if (a >= mod) a -= mod;
-    return a;
-}
-
-inline i64 submod(i64 a, i64 b, i64 mod = MOD) {
-    a %= mod; b %= mod;
-    a -= b;
-    if (a < 0) a += mod;
-    return a;
-}
-
-inline i64 mulmod(i64 a, i64 b, i64 mod = MOD) {
-    return (i64)((i128)a * b % mod);
-}
-
-i64 binpow(i64 a, i64 e, i64 mod = MOD) {
-    i64 r = 1 % mod;
-    a %= mod;
-    while (e) {
-        if (e & 1) r = mulmod(r, a, mod);
-        a = mulmod(a, a, mod);
-        e >>= 1;
-    }
-    return r;
-}
-
-// Inverso modular usando Fermat (MOD debe ser primo)
-inline i64 invmod_fermat(i64 a, i64 mod = MOD) {
-    return binpow(a, mod - 2, mod);
-}
-
-// Extended GCD
-i64 egcd(i64 a, i64 b, i64 &x, i64 &y) {
-    if (!b) {
-        x = 1; y = 0;
-        return a;
-    }
-    i64 x1, y1;
-    i64 g = egcd(b, a % b, x1, y1);
-    x = y1;
-    y = x1 - (a / b) * y1;
-    return g;
-}
-
-// Inverso modular usando EGCD (funciona con MOD no primo si gcd(a,MOD)=1)
-inline i64 invmod(i64 a, i64 mod = MOD) {
-    i64 x, y;
-    i64 g = egcd(a, mod, x, y);
-    if (g != 1) return -1; // no existe
-    x %= mod;
-    if (x < 0) x += mod;
-    return x;
-}
-
-inline i64 moddiv(i64 a, i64 b, i64 mod = MOD) {
-    i64 inv = invmod(b, mod);
-    return inv == -1 ? -1 : mulmod(a, inv, mod);
-}
-```
+}```
 
 # TEORÍA DE JUEGOS (GAMES)
 
@@ -906,9 +650,6 @@ int get_grundy(int state) {
 // Si get_grundy(initial_state) > 0 -> Gana el primer jugador.
 ```
 
-
-
-\newpage
 
 # FAST FOURIER TRANSFORM (FFT)
 
@@ -977,10 +718,6 @@ vector<int> multiply(vector<int> const& a, vector<int> const& b) {
 }
 ```
 
-
-
-\newpage
-
 # GEOMETRÍA COMPUTACIONAL
 
 ## 1\. Primitivas Básicas (Punto 2D)
@@ -1013,8 +750,6 @@ ld mag(Pt v) { return sqrt(mag_sq(v)); }
 T orient(Pt a, Pt b, Pt c) { return cross(b-a, c-a); } // >0 izq, <0 der, =0 colineal
 ```
 
-
-
 ## 2\. Convex Hull (Monotone Chain)
 
 Envolvente convexa: el polígono convexo más pequeño que contiene todos los puntos.
@@ -1027,30 +762,6 @@ Envolvente convexa: el polígono convexo más pequeño que contiene todos los pu
     1.  Ordena los puntos lexicográficamente (x, luego y).
     2.  Construye la parte superior ("upper hull") e inferior ("lower hull") iterando y verificando giros con producto cruz.
     3.  Si se forma un giro a la derecha (no convexo), elimina el último punto añadido hasta que sea convexo.
-
-### Implementación
-
-```cpp
-vector<Pt> convex_hull(vector<Pt>& pts) {
-    int n = pts.size(), k = 0;
-    if (n <= 2) return pts;
-    vector<Pt> h(2 * n);
-    sort(all(pts));
-    // Lower hull
-    for (int i = 0; i < n; ++i) {
-        while (k >= 2 && cross(h[k-1]-h[k-2], pts[i]-h[k-2]) <= 0) k--;
-        h[k++] = pts[i];
-    }
-    // Upper hull
-    for (int i = n-2, t = k+1; i >= 0; i--) {
-        while (k >= t && cross(h[k-1]-h[k-2], pts[i]-h[k-2]) <= 0) k--;
-        h[k++] = pts[i];
-    }
-    h.resize(k-1); // Eliminar punto duplicado final
-    return h;
-}
-```
-
 
 
 ## 3\. Área de Polígono (Shoelace Formula)
@@ -1071,8 +782,6 @@ T polygon_area_2(const vector<Pt>& p) { // Retorna 2 * Area
     return abs(area);
 }
 ```
-
-
 
 ## 4\. Punto en Polígono (Point in Polygon)
 
@@ -1111,8 +820,6 @@ int point_in_polygon(const vector<Pt>& p, Pt a) {
 2.  **NO USEN FAST I/O A CIEGAS:** Su plantilla tiene `cin.tie(nullptr)`. Esto desvincula la entrada de la salida. Si no hacen flush manual, su código esperará una entrada que nunca llegará porque la pregunta sigue en su buffer.
 3.  **LEAN LOS LÍMITES DE QUERIES:** $100$ queries $\implies O(N)$ o $O(\sqrt{N})$ es inaceptable. Necesitan $O(\log N)$ o $O(1)$.
 4.  **WRAPPER DE QUERY:** No repitan código. Hagan una función para consultar.
-
-
 
 ## 1\. Búsqueda Binaria Interactiva
 
@@ -1156,8 +863,6 @@ void solve() {
 }
 ```
 
-
-
 ## 2\. Reconstrucción Bit a Bit (Bit Manipulation)
 
 Para encontrar números ocultos cuando las queries permiten operaciones OR, AND, XOR, o sumas.
@@ -1195,8 +900,6 @@ void solve() {
     cout << "! " << hidden_X << endl;
 }
 ```
-
-
 
 ## 3\. Búsqueda Ternaria Interactiva
 
@@ -1315,7 +1018,7 @@ void solve() {
 }
 ```
 
-\newpage
+
 
 # DIVIDE AND CONQUER
 
@@ -1459,8 +1162,6 @@ nth_element(a.begin(), a.begin() + k, a.end());
 cout << a[k] << endl; // Output: 5 (arreglo podría quedar {1, 2, 5, 9, 5, 6} o similar)
 ```
 
-\newpage
-
 # COMBINATORIA & FUNCIONES GENERATRICES
 
 ## 1\. Combinatoria Básica & Coeficientes Binomiales
@@ -1494,7 +1195,6 @@ void precompute() {
     }
 }
 ```
-
 
 
 ## 2\. Principio de Inclusión-Exclusión (PIE)
